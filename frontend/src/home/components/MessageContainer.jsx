@@ -4,7 +4,7 @@ import { TiMessages } from "react-icons/ti";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { IoArrowBackSharp, IoSend } from "react-icons/io5";
 import axios from "axios";
-import { useSocketContext } from "../../context/socketContext.jsx";
+import { useSocketContext } from "../../context/SocketContext.jsx";
 import notify from "../../assets/notification.mp3";
 
 const MessageContainer = ({ onBackUser }) => {
