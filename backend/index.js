@@ -6,6 +6,7 @@ import messageRouter from './rout/messageRout.js'
 import userRouter from './rout/userRout.js'
 import cookieParser from "cookie-parser";
 import path from "path";
+import cors from 'cors'
 
 import {app , server} from './Socket/socket.js'
 
@@ -16,7 +17,7 @@ dotenv.config();
 
 app.use(express.json());
 app.use(cookieParser())
-
+app.use(cors());
 app.use('/api/auth',authRouter)
 app.use('/api/message',messageRouter)
 app.use('/api/user',userRouter)
