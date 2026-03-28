@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #a7bcff;
+  /*background: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url('/bg.jpg');*/
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: "Montserrat", "sans-serif";
+}
+.formContainer {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-form .formWrapper {
+  background-color: white;
+  padding: 20px 60px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.login-form .logo {
+  color: #5d5b8d;
+  font-weight: bold;
+  font-size: 24px;
+}
+.login-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.checkbox {
+  width: 10px !important;
+}
+.login-form form input {
+  background-color: white;
+  padding: 15px;
+  border: none;
+  width: 250px;
+  border-bottom: 1px solid #a7bcff;
+  &::placeholder {
+    color: rgb(175, 175, 175);
+  }
+}
+.login-form form button {
+  background-color: #7b96ec;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+.login-form p {
+  color: #5d5b8d;
+  font-size: 12px;
+  margin-top: 10px;
+}
+.home {
+  background-color: #a7bcff;
+}
+.sidebar {
+  background-color: #3e3c61;
+  border-radius: 5px;
+  color: white;
+}
+.search {
+  background-color: #222037;
+}
+.searchBtn {
+  background-color: #222037;
+}
+.usernames {
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+}
+.active-chat {
+  background-color: #646191;
+}
+.messageContainer {
+  background-color: #ddddf7;
+}
+.chatInfo {
+  background-color: #5d5b8d;
+}
+.sendBtn {
+  background-color: #8da4f1;
+  color: #5768a0;
+}
+.userChat {
+  color: #5d5b8d;
+}
+.user-msg {
+  background-color: #8aa3f6;
+  color: white;
+  font-weight: 500;
+}
+.sender-msg {
+  background-color: #e4e4e6;
+  color: rgb(68, 67, 67);
+  font-weight: 500;
+}
+.unreadMsg {
+  background-color: #a7bcff;
+}
+.searchBackBtn {
+  background-color: #5d5b8d;
+}
