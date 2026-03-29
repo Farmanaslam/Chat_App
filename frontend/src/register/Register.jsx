@@ -25,6 +25,7 @@ const Register = () => {
   };
 
   const handelSubmit = async (e) => {
+    const API_BASE = "http://13.60.221.170:3000";
     e.preventDefault();
     setLoading(true);
     if (inputData.password !== inputData.confpassword.toLowerCase()) {
@@ -32,7 +33,10 @@ const Register = () => {
       return toast.error("Password Dosen't match");
     }
     try {
-      const register = await axios.post(`/api/auth/register`, inputData);
+      const register = await axios.post(
+        `${API_BASE}/api/auth/register`,
+        inputData,
+      );
       const data = register.data;
       if (data.success === false) {
         setLoading(false);
