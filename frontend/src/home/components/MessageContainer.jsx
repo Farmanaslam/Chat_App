@@ -8,6 +8,7 @@ import { useSocketContext } from "../../context/SocketContext.jsx";
 import notify from "../../assets/notification.mp3";
 
 const MessageContainer = ({ onBackUser }) => {
+  const API_BASE = "http://13.60.221.170:3000";
   const {
     messages,
     selectedConversation,
@@ -41,7 +42,8 @@ const MessageContainer = ({ onBackUser }) => {
       setLoading(true);
       try {
         const get = await axios.get(
-          `/api/message/${selectedConversation?._id}`
+          `${API_BASE}/api/message/${selectedConversation?._id}`,
+          { withCredentials: true },
         );
         const data = await get.data;
         if (data.success === false) {
@@ -67,8 +69,9 @@ const MessageContainer = ({ onBackUser }) => {
     setSending(true);
     try {
       const res = await axios.post(
-        `/api/message/send/${selectedConversation?._id}`,
-        { messages: sendData }
+        `${API_BASE}/api/message/send/${selectedConversation?._id}`,
+        { messages: sendData },
+        { withCredentials: true },
       );
       const data = await res.data;
       if (data.success === false) {
@@ -169,7 +172,7 @@ const MessageContainer = ({ onBackUser }) => {
                       <span className="px-1">
                         {new Date(message?.createdAt).toLocaleTimeString(
                           "en-IN",
-                          { hour: "numeric", minute: "numeric" }
+                          { hour: "numeric", minute: "numeric" },
                         )}
                       </span>
                     </div>

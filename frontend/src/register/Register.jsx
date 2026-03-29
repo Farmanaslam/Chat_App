@@ -36,6 +36,7 @@ const Register = () => {
       const register = await axios.post(
         `${API_BASE}/api/auth/register`,
         inputData,
+        { withCredentials: true },
       );
       const data = register.data;
       if (data.success === false) {

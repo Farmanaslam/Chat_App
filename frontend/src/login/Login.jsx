@@ -24,7 +24,9 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const login = await axios.post(`${API_BASE}/api/auth/login`, userInput);
+      const login = await axios.post(`${API_BASE}/api/auth/login`, userInput, {
+        withCredentials: true,
+      });
       const data = login.data;
       if (data.success === false) {
         setLoading(false);
