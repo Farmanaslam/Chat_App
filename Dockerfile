@@ -13,9 +13,6 @@ RUN npm install
 # Copy backend code
 COPY backend ./backend
 
-# Copy .env
-COPY .env ./
-
 WORKDIR /app/backend
 
 # Expose backend port
