@@ -13,12 +13,9 @@ export const userRegister = async (req, res) => {
         .status(500)
         .send({ success: false, message: " UserName or Email Alredy Exist " });
     const hashPassword = bcryptjs.hashSync(password, 10);
-    const profileBoy =
+    const profilePic =
       profilepic ||
-      `https://avatar.iran.liara.run/public/boy?username=${username}`;
-    const profileGirl =
-      profilepic ||
-      `https://avatar.iran.liara.run/public/girl?username=${username}`;
+      `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
 
     const newUser = new User({
       fullname,
@@ -26,7 +23,7 @@ export const userRegister = async (req, res) => {
       email,
       password: hashPassword,
       gender,
-      profilepic: gender === "male" ? profileBoy : profileGirl,
+      profilepic: profilePic,
     });
 
     if (newUser) {
@@ -59,15 +56,16 @@ export const userLogin = async (req, res) => {
     if (!user)
       return res
         .status(500)
-        .send({ success: false, message: "Email Dosen't Exist Please Register" });
-    const comparePasss = bcryptjs.compareSync(password, user.password || "");
-    if (!comparePasss)
-      return res
-        .status(500)
         .send({
           success: false,
-          message: "Email Or Password Doesn't Matching",
+          message: "Email Dosen't Exist Please Register",
         });
+    const comparePasss = bcryptjs.compareSync(password, user.password || "");
+    if (!comparePasss)
+      return res.status(500).send({
+        success: false,
+        message: "Email Or Password Doesn't Matching",
+      });
 
     jwtToken(user._id, res);
 
