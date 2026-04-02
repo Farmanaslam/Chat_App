@@ -4,7 +4,7 @@ const userSchema = mongoose.Schema(
   {
     fullname: {
       type: String,
-      required: true,
+      required: false,
     },
     username: {
       type: String,
@@ -18,12 +18,11 @@ const userSchema = mongoose.Schema(
     },
     gender: {
       type: String,
-      required: true,
       enum: ["male", "female"],
     },
     password: {
       type: String,
-      required: true,
+      required: false,
       minlength: 6,
     },
     profilepic: {
@@ -31,8 +30,13 @@ const userSchema = mongoose.Schema(
       required: true,
       default: "",
     },
+    authProvider: {
+      type: String,
+      enum: ["local", "google"],
+      default: "local",
+    },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const User = mongoose.model("User", userSchema);

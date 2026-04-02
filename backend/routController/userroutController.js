@@ -1,7 +1,9 @@
 import User from "../Models/userModels.js";
 import bcryptjs from "bcryptjs";
 import jwtToken from "../utils/jwtwebToken.js";
-
+import { oauth2client } from "../utils/googleConfig.js";
+import axios from "axios";
+import jwt from "jsonwebtoken";
 export const userRegister = async (req, res) => {
   try {
     const { fullname, username, email, gender, password, profilepic } =
@@ -54,12 +56,10 @@ export const userLogin = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user)
-      return res
-        .status(500)
-        .send({
-          success: false,
-          message: "Email Dosen't Exist Please Register",
-        });
+      return res.status(500).send({
+        success: false,
+        message: "Email Dosen't Exist Please Register",
+      });
     const comparePasss = bcryptjs.compareSync(password, user.password || "");
     if (!comparePasss)
       return res.status(500).send({
@@ -98,5 +98,37 @@ export const userLogOut = async (req, res) => {
       message: error,
     });
     console.log(error);
+  }
+};
+export const googleLogin = async (req, res) => {
+  try {
+    console.log("🔥 HIT GOOGLE ROUTE");
+    console.log("🔥 BODY:", req.body);
+
+    const code = req.body?.code;
+
+    if (!code) {
+      console.log("❌ NO CODE RECEIVED");
+      return res.status(400).json({
+        success: false,
+        message: "No code received",
+      });
+    }
+
+    console.log("✅ AUTH CODE:", code);
+
+    const googleRes = await oauth2client.getToken(code);
+
+    console.log("✅ GOOGLE TOKEN RESPONSE:", googleRes);
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error("❌ FULL ERROR:", error); // VERY IMPORTANT
+
+    res.status(500).json({
+      success: false,
+      message: "Error logging in with Google",
+      error: error.message,
+    });
   }
 };
