@@ -32,7 +32,7 @@ const Register = () => {
       return toast.error("Password Dosen't match");
     }
     try {
-      const register = await axios.post(`https://chat-app-b14o.onrender.com/api/auth/register`, inputData);
+      const register = await axios.post(`/api/auth/register`, inputData);
       const data = register.data;
       if (data.success === false) {
         setLoading(false);

@@ -41,7 +41,7 @@ const MessageContainer = ({ onBackUser }) => {
       setLoading(true);
       try {
         const get = await axios.get(
-          `https://chat-app-b14o.onrender.com/api/message/${selectedConversation?._id}`,{
+          `/api/message/${selectedConversation?._id}`,{
         withCredentials:true,
       }
         );
@@ -69,7 +69,7 @@ const MessageContainer = ({ onBackUser }) => {
     setSending(true);
     try {
       const res = await axios.post(
-        `https://chat-app-b14o.onrender.com/api/message/send/${selectedConversation?._id}`,
+        `/api/message/send/${selectedConversation?._id}`,
         { messages: sendData,withCredentials:true, }
       );
       const data = await res.data;
