@@ -182,12 +182,6 @@ Use Postman or Thunder Client to test APIs.
 
 ---
 
-## 📸 Screenshots
-
-*Add your app screenshots here*
-
----
-
 ## 🧑‍💻 Author
 
 **Md Farman Aslam**
