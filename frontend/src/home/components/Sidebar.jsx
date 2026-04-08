@@ -42,7 +42,9 @@ const Sidebar = ({ onSelectUser }) => {
     const chatUserHandler = async () => {
       setLoading(true);
       try {
-        const chatters = await axios.get(`/api/user/currentchatters`);
+        const chatters = await axios.get(`https://chat-app-b14o.onrender.com/api/user/currentchatters`,{
+        withCredentials:true,
+      });
         const data = chatters.data;
         if (data.success === false) {
           setLoading(false);
@@ -63,7 +65,9 @@ const Sidebar = ({ onSelectUser }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const search = await axios.get(`/api/user/search?search=${searchInput}`);
+      const search = await axios.get(`https://chat-app-b14o.onrender.com/api/user/search?search=${searchInput}`,{
+        withCredentials:true,
+      });
       const data = search.data;
       if (data.success === false) {
         setLoading(false);
@@ -101,7 +105,7 @@ const Sidebar = ({ onSelectUser }) => {
     if (confirmlogout === authUser.username) {
       setLoading(true);
       try {
-        const logout = await axios.post("/api/auth/logout");
+        const logout = await axios.post("https://chat-app-b14o.onrender.com/api/auth/logout");
         const data = logout.data;
         if (data?.success === false) {
           setLoading(false);

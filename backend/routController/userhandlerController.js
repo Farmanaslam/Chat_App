@@ -45,13 +45,13 @@ export const getCorrentChatters = async (req, res) => {
 
     const partcipantsIDS = currenTChatters.reduce((ids, conversation) => {
       const otherParticipents = conversation.participants.filter(
-        (id) => id !== currentUserID
+        (id) => id !== currentUserID,
       );
       return [...ids, ...otherParticipents];
     }, []);
 
     const otherParticipentsIDS = partcipantsIDS.filter(
-      (id) => id.toString() !== currentUserID.toString()
+      (id) => id.toString() !== currentUserID.toString(),
     );
 
     const user = await User.find({ _id: { $in: otherParticipentsIDS } })
@@ -59,7 +59,7 @@ export const getCorrentChatters = async (req, res) => {
       .select("-email");
 
     const users = otherParticipentsIDS.map((id) =>
-      user.find((user) => user._id.toString() === id.toString())
+      user.find((user) => user._id.toString() === id.toString()),
     );
 
     res.status(200).send(users);

@@ -54,12 +54,10 @@ export const userLogin = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user)
-      return res
-        .status(500)
-        .send({
-          success: false,
-          message: "Email Dosen't Exist Please Register",
-        });
+      return res.status(500).send({
+        success: false,
+        message: "Email Dosen't Exist Please Register",
+      });
     const comparePasss = bcryptjs.compareSync(password, user.password || "");
     if (!comparePasss)
       return res.status(500).send({
