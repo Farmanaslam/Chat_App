@@ -42,7 +42,7 @@ export const getCorrentChatters = async (req, res) => {
 
     const partcipantsIDS = currenTChatters.reduce((ids, conversation) => {
       const otherParticipents = conversation.participants.filter(
-        (id) => id.toString() !== currentUserID.toString() // ✅ use .toString() for ObjectId comparison
+        (id) => id.toString() !== currentUserID.toString(), // ✅ use .toString() for ObjectId comparison
       );
       return [...ids, ...otherParticipents];
     }, []);
@@ -52,7 +52,7 @@ export const getCorrentChatters = async (req, res) => {
       .select("-email");
 
     const users = partcipantsIDS.map((id) =>
-      user.find((u) => u._id.toString() === id.toString())
+      user.find((u) => u._id.toString() === id.toString()),
     );
 
     res.status(200).send(users);

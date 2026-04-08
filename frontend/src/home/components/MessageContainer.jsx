@@ -70,7 +70,9 @@ const MessageContainer = ({ onBackUser }) => {
     try {
       const res = await axios.post(
         `/api/message/send/${selectedConversation?._id}`,
-        { messages: sendData,withCredentials:true, }
+        { messages: sendData,},{
+          withCredentials:true,
+        }
       );
       const data = await res.data;
       if (data.success === false) {
