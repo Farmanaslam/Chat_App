@@ -16,9 +16,20 @@ dotenv.config();
 
 app.use(express.json());
 app.use(cookieParser());
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://your-frontend.vercel.app", // ✅ add your actual frontend URL
+];
+
 app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true, // ✅ must be true for cookies
 }));
 app.use("/api/auth", authRouter);
 app.use("/api/message", messageRouter);
