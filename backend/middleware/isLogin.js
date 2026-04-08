@@ -1,37 +1,47 @@
 import jwt from "jsonwebtoken";
 import User from "../Models/userModels.js";
 
-const isLogin = (req, res, next) => {
+const isLogin = async (req, res, next) => {
   try {
-    //console.log(req.cookies.jwt);
-    
+    console.log("Cookies:", req.cookies); // debug
+
     const token = req.cookies.jwt;
-   // console.log(token);
+
     if (!token) {
-      return res
-        .status(500)
-        .send({ success: false, message: "User unauthorized" });
+      return res.status(401).json({
+        success: false,
+        message: "User unauthorized (no token)",
+      });
     }
+
     const decode = jwt.verify(token, process.env.JWT_SECRET);
+
     if (!decode) {
-      return res
-        .status(500)
-        .send({ success: false, message: "User unauthorized- Invalid Token" });
+      return res.status(401).json({
+        success: false,
+        message: "Invalid token",
+      });
     }
-    const user = User.findById(decode.userId).select("-passward");
+
+    const user = await User.findById(decode.userId).select("-password");
+
     if (!user) {
-      return res
-        .status(500)
-        .send({ success: false, message: "User not Found" });
+      return res.status(401).json({
+        success: false,
+        message: "User not found",
+      });
     }
+
     req.user = user;
     next();
   } catch (error) {
-    console.log(`Error in IsLogin Middleware ${error.message}`);
-    res.status(500).send({
+    console.log("Middleware Error:", error.message);
+
+    return res.status(500).json({
       success: false,
-      message: error,
+      message: "Server error in auth",
     });
   }
 };
+
 export default isLogin;
