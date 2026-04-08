@@ -1,3 +1,6 @@
+import Conversation from "../Models/conversationModels.js";
+import User from "../Models/userModels.js";
+
 export const getUserBySearch = async (req, res) => {
   try {
     const search = req.query.search || "";
