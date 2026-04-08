@@ -1,10 +1,8 @@
-import Conversation from "../Models/conversationModels.js";
-import User from "../Models/userModels.js";
-
 export const getUserBySearch = async (req, res) => {
   try {
     const search = req.query.search || "";
-    const currentUserID = req.user._conditions._id;
+    const currentUserID = req.user._id; // ✅ fixed
+
     const user = await User.find({
       $and: [
         {
@@ -23,51 +21,40 @@ export const getUserBySearch = async (req, res) => {
 
     res.status(200).send(user);
   } catch (error) {
-    res.status(500).send({
-      success: false,
-      message: error,
-    });
+    res.status(500).send({ success: false, message: error });
     console.log(error);
   }
 };
 
 export const getCorrentChatters = async (req, res) => {
   try {
-    const currentUserID = req.user._conditions._id;
+    const currentUserID = req.user._id; // ✅ fixed
+
     const currenTChatters = await Conversation.find({
       participants: currentUserID,
-    }).sort({
-      updatedAt: -1,
-    });
+    }).sort({ updatedAt: -1 });
 
     if (!currenTChatters || currenTChatters.length === 0)
       return res.status(200).send([]);
 
     const partcipantsIDS = currenTChatters.reduce((ids, conversation) => {
       const otherParticipents = conversation.participants.filter(
-        (id) => id !== currentUserID,
+        (id) => id.toString() !== currentUserID.toString() // ✅ use .toString() for ObjectId comparison
       );
       return [...ids, ...otherParticipents];
     }, []);
 
-    const otherParticipentsIDS = partcipantsIDS.filter(
-      (id) => id.toString() !== currentUserID.toString(),
-    );
-
-    const user = await User.find({ _id: { $in: otherParticipentsIDS } })
+    const user = await User.find({ _id: { $in: partcipantsIDS } })
       .select("-password")
       .select("-email");
 
-    const users = otherParticipentsIDS.map((id) =>
-      user.find((user) => user._id.toString() === id.toString()),
+    const users = partcipantsIDS.map((id) =>
+      user.find((u) => u._id.toString() === id.toString())
     );
 
     res.status(200).send(users);
   } catch (error) {
-    res.status(500).send({
-      success: false,
-      message: error,
-    });
+    res.status(500).send({ success: false, message: error });
     console.log(error);
   }
 };
