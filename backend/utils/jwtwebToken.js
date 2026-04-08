@@ -1,3 +1,5 @@
+import jwt from "jsonwebtoken";
+
 const jwtToken = (userId, res) => {
   const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
     expiresIn: "30d",
@@ -9,3 +11,5 @@ const jwtToken = (userId, res) => {
     secure: true,      // ✅ Required when sameSite is "none"
   });
 };
+
+export default jwtToken;
