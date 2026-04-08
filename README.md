@@ -6,7 +6,7 @@ A full-stack real-time chat application built using the **MERN Stack** with **So
 
 ## 🚀 Features
 
-* 🔐 User Authentication (JWT आधारित)
+* 🔐 User Authentication (JWT Based)
 * 👤 User Search & Chat Initiation
 * 💬 Real-time Messaging using Socket.IO
 * 🟢 Online Users Indicator
