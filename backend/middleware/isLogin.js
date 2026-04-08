@@ -3,8 +3,6 @@ import User from "../Models/userModels.js";
 
 const isLogin = async (req, res, next) => {
   try {
-    console.log("Cookies:", req.cookies); // debug
-
     const token = req.cookies.jwt;
 
     if (!token) {
@@ -35,7 +33,7 @@ const isLogin = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    console.log("Middleware Error:", error.message);
+    console.log("isLogin Middleware Error:", error.message);
 
     return res.status(500).json({
       success: false,

@@ -6,7 +6,6 @@ export const userRegister = async (req, res) => {
   try {
     const { fullname, username, email, gender, password, profilepic } =
       req.body;
-    console.log(req.body);
     const user = await User.findOne({ username, email });
     if (user)
       return res

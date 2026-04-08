@@ -60,7 +60,6 @@ const MessageContainer = ({ onBackUser }) => {
     };
     if (selectedConversation?._id) getMessages();
   }, [selectedConversation?._id, setMessage]);
-  console.log(messages);
 
   const handelMessages = async (e) => {
     setSnedData(e.target.value);

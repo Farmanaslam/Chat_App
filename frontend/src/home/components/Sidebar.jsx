@@ -42,9 +42,9 @@ const Sidebar = ({ onSelectUser }) => {
     const chatUserHandler = async () => {
       setLoading(true);
       try {
-        const chatters = await axios.get(`/api/user/currentchatters`,{
-        withCredentials:true,
-      });
+        const chatters = await axios.get(`/api/user/currentchatters`, {
+          withCredentials: true,
+        });
         const data = chatters.data;
         if (data.success === false) {
           setLoading(false);
@@ -65,8 +65,8 @@ const Sidebar = ({ onSelectUser }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const search = await axios.get(`/api/user/search?search=${searchInput}`,{
-        withCredentials:true,
+      const search = await axios.get(`/api/user/search?search=${searchInput}`, {
+        withCredentials: true,
       });
       const data = search.data;
       if (data.success === false) {

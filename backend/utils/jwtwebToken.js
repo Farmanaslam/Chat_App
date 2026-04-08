@@ -7,10 +7,9 @@ const jwtToken = (userId, res) => {
   res.cookie("jwt", token, {
     maxAge: 30 * 24 * 60 * 60 * 1000,
     httpOnly: true,
-    sameSite: "none",  // ✅ Required for cross-origin
-    secure: true,      // ✅ Required when sameSite is "none"
+    sameSite: "none",
+    secure: true,
   });
 };
 
 export default jwtToken;
- 
