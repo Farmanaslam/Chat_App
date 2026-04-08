@@ -41,9 +41,10 @@ const MessageContainer = ({ onBackUser }) => {
       setLoading(true);
       try {
         const get = await axios.get(
-          `/api/message/${selectedConversation?._id}`,{
-        withCredentials:true,
-      }
+          `/api/message/${selectedConversation?._id}`,
+          {
+            withCredentials: true,
+          },
         );
         const data = await get.data;
         if (data.success === false) {
@@ -70,9 +71,10 @@ const MessageContainer = ({ onBackUser }) => {
     try {
       const res = await axios.post(
         `/api/message/send/${selectedConversation?._id}`,
-        { messages: sendData,},{
-          withCredentials:true,
-        }
+        { messages: sendData },
+        {
+          withCredentials: true,
+        },
       );
       const data = await res.data;
       if (data.success === false) {
@@ -173,7 +175,7 @@ const MessageContainer = ({ onBackUser }) => {
                       <span className="px-1">
                         {new Date(message?.createdAt).toLocaleTimeString(
                           "en-IN",
-                          { hour: "numeric", minute: "numeric" }
+                          { hour: "numeric", minute: "numeric" },
                         )}
                       </span>
                     </div>
