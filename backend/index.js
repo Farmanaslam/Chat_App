@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cookieParser());
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://your-frontend.vercel.app", // ✅ add your actual frontend URL
+  "https://chat-app-iota-lilac.vercel.app/login", // ✅ add your actual frontend URL
 ];
 
 app.use(cors({
